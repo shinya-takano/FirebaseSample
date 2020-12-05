@@ -1,11 +1,15 @@
 package tk.sh.dev.firebase.sample
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +17,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        val date = intent.extras?.getString("date") ?: ""
+        val screen = intent.extras?.getString("screen") ?: ""
+        Log.d("MainActivity", "$date=$screen")
+        if (date.isNotEmpty() && screen.isNotEmpty()) {
+            Toast.makeText(this, "date=$date, screen=$screen", Toast.LENGTH_LONG).show()
+        }
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
